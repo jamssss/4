@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>新冠病毒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    <small>最新新冠情况</small>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 column">
+            <form th:action="@{/country}"  method="post">
+                <input type="text" name="searchCountry" th:placeholder="请输入国家名"/>
+                <input type="submit" value="搜索">
+            </form>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>州/省</th>
+                    <th>国家</th>
+                    <th>最新总数</th>
+                    <th>新增数</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="regionStates:${RegionStatesLists}">
+                        <td th:text="${regionStates.getState() }"></td>
+                        <td th:text="${regionStates.getCountry() }"></td>
+                        <td th:text="${regionStates.getLatestTotalCases() }"></td>
+                        <td th:text="${regionStates.getDiffFromPrevDay() }"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
